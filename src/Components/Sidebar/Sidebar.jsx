@@ -18,7 +18,7 @@ import cameron from '../../assets/cameron.png'
 export default function Sidebar() {
   return (
         <div className="sidebar">
-            <div className="sortcut-links">
+            <div className="shortcut-links">
                 <div className="side-link">
                     <img src={home} alt="" /> <p>Home</p>
                 </div>
