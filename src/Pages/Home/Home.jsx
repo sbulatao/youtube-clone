@@ -2,10 +2,10 @@ import React from 'react'
 import './Home.css'
 import Sidebar from '../../Components/Sidebar/Sidebar'
 
-export default function Home() {
+export default function Home({ sidebar }) {
   return (
     <>
-      <Sidebar />
+      <Sidebar sidebar={sidebar}/>
     </>
   )
 }
