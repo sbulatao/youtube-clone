@@ -17,7 +17,6 @@ import cameron from '../../assets/cameron.png'
 
 export default function Sidebar() {
   return (
-    <div>
         <div className="sidebar">
             <div className="sortcut-links">
                 <div className="side-link">
@@ -47,9 +46,28 @@ export default function Sidebar() {
                 <div className="side-link">
                     <img src={news} alt="" /> <p>News</p>
                 </div>
+                <hr />
+            </div>
+
+            <div className="subscribed-list">
+                <h3>Subscribed</h3>
+                <div className="side-link">
+                    <img src={jack} alt="" /> <p>MonkeyExplains</p>
+                </div>
+                <div className="side-link">
+                    <img src={simon} alt="" /> <p>The_FirstTake</p>
+                </div>
+                <div className="side-link">
+                    <img src={tom} alt="" /> <p>Disguised Toast</p>
+                </div>
+                <div className="side-link">
+                    <img src={megan} alt="" /> <p>Doja Cat</p>
+                </div>
+                <div className="side-link">
+                    <img src={cameron} alt="" /> <p>Viyuara</p>
+                </div>
             </div>
         </div>
-    </div>
   )
 
 }
