@@ -16,13 +16,13 @@ export default function PlayVideo() {
         <div className="play-video-info">
             <p>1525 Views &bull; 2 days ago</p>
             <div>
-                <span><img src={like} alt="" /> Like</span>
-                <span><img src={dislike} alt="" /> Dislike</span>
+                <span><img src={like} alt="" /> 420</span>
+                <span><img src={dislike} alt="" /> 69</span>
                 <span><img src={share} alt="" /> Share</span>
                 <span><img src={save} alt="" /> Save</span>
             </div>
         </div>
-
+        
         <hr />
 
         <div className="publisher">
