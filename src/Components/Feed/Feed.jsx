@@ -8,17 +8,18 @@ import thumbnail5 from '../../assets/thumbnail5.png'
 import thumbnail6 from '../../assets/thumbnail6.png'
 import thumbnail7 from '../../assets/thumbnail7.png'
 import thumbnail8 from '../../assets/thumbnail8.png'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { API_KEY, valueConverter } from '../../data.js'
 import axios from 'axios'
 import moment from 'moment'
 
 export default function Feed({ category }) {
 
+    const categoryId = Number(category);
     const [videos, setVideos] = useState([]);
 
     async function fetchVideos(category) {
-        const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category || 0}&key=${API_KEY}`);
+        const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&maxResults=50&regionCode=US&videoCategoryId=${category || categoryId}&key=${API_KEY}`);
         setVideos(data.items);
         console.log(data);
     }
