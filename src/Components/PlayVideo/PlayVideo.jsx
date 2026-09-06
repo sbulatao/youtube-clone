@@ -62,9 +62,8 @@ export default function PlayVideo({ videoId }) {
         <hr />
 
         <div className="publisher">
-            <img src={jack} alt="" />
+            <img src={channelData ? channelData?.snippet?.thumbnails?.default?.url : ""} alt="" />
             <div>
-                {/* <p>{apiData ? apiData.snippet.channelTitle : ""}</p> */}
                 <p>{channelData ? channelData?.snippet?.title : ""}</p>
                 <span>{channelData ? valueConverter(channelData?.statistics?.subscriberCount) : "1M"} Subscribers</span>
             </div>
