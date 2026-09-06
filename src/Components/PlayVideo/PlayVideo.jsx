@@ -17,36 +17,26 @@ export default function PlayVideo({ videoId }) {
     const [channelData, setChannelData] = useState(null);
 
     // 1. fetch video data when componenet mounts or videoId changes
-    useEffect(() => {
-        async function fetchVideoData() { // fetching video data
-            try {
-                const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`);
-                setApiData(data.items[0]);
-                console.log("video data: ",data.items[0])
-            } catch (error) {
-                console.error("ERROR FETCHING VIDEO DATA: ", error)
-            }
-        }
+    async function fetchVideoData() { // fetching video data
+            const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&id=${videoId}&key=${API_KEY}`);
+            setApiData(data.items[0]);
+            console.log("video data: ",data.items[0])
+    }
 
+    // 2. fetch channel data ONLY after apiData becomes available
+    async function fetchOtherData() { // fetching channel data
+            const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`);
+            setChannelData(data.items[0]);
+            console.log("channel data: ", data.items[0]);
+    }
+
+    
+    useEffect(() => {
         if(videoId) fetchVideoData();
     }, [videoId]) // Add videoId HERE so it refetches if user switches videos
 
-
-    // 2. fetch channel data ONLY after apiData becomes available
     useEffect(() => {
-        // STOP if apiData or channelId isn't loaded yet
-        if(!apiData || !apiData.snippet?.channelId) return;
-
-        async function fetchOtherData() { // fetching channel data
-            try {
-                const { data } = await axios.get(`https://youtube.googleapis.com/youtube/v3/channels?part=snippet%2CcontentDetails%2Cstatistics&id=${apiData.snippet.channelId}&key=${API_KEY}`);
-                setChannelData(data.items[0]);
-                console.log("channel data: ", data.items[0]);
-                
-            } catch (error) {
-                console.log("ERROR FETCHING CHANNEL DATA: ", error)
-            }
-        }
+        if(!apiData || !apiData.snippet?.channelId) return; // STOP if apiData/channelId isn't loaded yet
 
         fetchOtherData();
     },[apiData]) // watches apiData and starts as soon as it updates
@@ -76,7 +66,7 @@ export default function PlayVideo({ videoId }) {
             <div>
                 {/* <p>{apiData ? apiData.snippet.channelTitle : ""}</p> */}
                 <p>{channelData ? channelData?.snippet?.title : ""}</p>
-                <span>{channelData ? channelData?.statistics?.subscriberCount : "1M"} Subscribers</span>
+                <span>{channelData ? valueConverter(channelData?.statistics?.subscriberCount) : "1M"} Subscribers</span>
             </div>
             <button>Subscribe</button>
         </div>
