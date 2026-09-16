@@ -7,7 +7,6 @@ import save from '../../assets/save.png'
 import { API_KEY, valueConverter } from '../../data'
 import axios from 'axios'
 import moment from 'moment'
-import { useParams } from 'react-router-dom'
 
 export default function PlayVideo({ videoId }) {
 
