@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './PlayVideo.css'
-import video1 from '../../assets/video.mp4'
 import like from '../../assets/like.png'
 import dislike from '../../assets/dislike.png'
 import share from '../../assets/share.png'
 import save from '../../assets/save.png'
-import jack from '../../assets/jack.png'
-import user_profile from '../../assets/user_profile.jpg'
 import { API_KEY, valueConverter } from '../../data'
 import axios from 'axios'
 import moment from 'moment'
+import { useParams } from 'react-router-dom'
 
 export default function PlayVideo({ videoId }) {
 
@@ -51,7 +49,6 @@ export default function PlayVideo({ videoId }) {
 
   return (
     <div className='play-video'>
-        {/* <video src={video1} controls autoPlay muted></video> */}
         <iframe src={`https://www.youtube.com/embed/${videoId}?autoplay=1`} frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
         <h3>{apiData ? apiData?.snippet?.title : "Title Here"}</h3>
@@ -84,12 +81,12 @@ export default function PlayVideo({ videoId }) {
 
             {commentData.map((item, index) => (
                 <div className="comment" key={index}>
-                    <img src={item.snippet.topLevelComment.snippet.authorProfileImageUrl} alt="" />
+                    <img src={item?.snippet?.topLevelComment?.snippet?.authorProfileImageUrl} alt="" />
                     <div>
-                        <h3>{item.snippet.topLevelComment.snippet.authorDisplayName}
+                        <h3>{item?.snippet?.topLevelComment?.snippet?.authorDisplayName}
                         <span>{moment(item.snippet.topLevelComment.snippet.publishedAt).fromNow()}</span>
                         </h3>
-                        <p>{item.snippet.topLevelComment.snippet.textDisplay}</p>
+                        <p>{item?.snippet?.topLevelComment?.snippet?.textDisplay}</p>
                         <div className="comment-action">
                             <img src={like} alt="" />
                             <span>{valueConverter(item.snippet.topLevelComment.snippet.likeCount)} </span>
